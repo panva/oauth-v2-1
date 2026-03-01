@@ -4673,8 +4673,23 @@ accepted, as appropriate.<a href="#section-7.3.1-2" class="pilcrow">¶</a></p>
 necessary.  The authorization server SHOULD take the client identity
 into account when choosing how to honor the requested scope and MAY
 issue an access token with fewer scopes than requested.<a href="#section-7.3.2-1" class="pilcrow">¶</a></p>
-<p id="section-7.3.2-2">Additionally, the privileges associated with an access token SHOULD
-be restricted as described in <a href="#access-token-security-considerations" class="auto internal xref">Section 7.1</a>.<a href="#section-7.3.2-2" class="pilcrow">¶</a></p>
+<p id="section-7.3.2-2">The privileges associated with an access token SHOULD be restricted to
+the minimum required for the particular application or use case. This
+prevents clients from exceeding the privileges authorized by the
+resource owner. It also prevents users from exceeding their privileges
+authorized by the respective security policy. Privilege restrictions
+also help to reduce the impact of access token leakage.<a href="#section-7.3.2-2" class="pilcrow">¶</a></p>
+<p id="section-7.3.2-3">In particular, access tokens SHOULD be restricted to certain resource
+servers (audience restriction), preferably to a single resource
+server. To put this into effect, the authorization server associates
+the access token with certain resource servers and every resource
+server is obliged to verify, for every request, whether the access
+token sent with that request was meant to be used for that particular
+resource server. If not, the resource server MUST refuse to serve the
+respective request. Clients and authorization servers MAY utilize the
+parameters <code>scope</code> or <code>resource</code> as specified in
+<span>[<a href="#RFC8707" class="cite xref">RFC8707</a>]</span>, respectively, to determine the
+resource server they want to access.<a href="#section-7.3.2-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
